@@ -1,100 +1,170 @@
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaInstagram, FaTiktok, FaUtensils, FaDollarSign } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 export default function Footer() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
+
+  const linkVariants = {
+    hidden: { opacity: 0, x: -10 },
+    visible: { opacity: 1, x: 0 },
+    hover: { x: 5, color: '#ef4444' },
+  };
+
+  const socialIconVariants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: { opacity: 1, scale: 1 },
+    hover: { scale: 1.15, rotate: 10 },
+    tap: { scale: 0.9 },
+  };
+
   return (
-    <footer className="bg-gray-900 text-gray-300 font-sans">
+    <motion.footer
+      className="bg-gray-900 text-gray-300 font-sans"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+    >
       <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+        <motion.div
+          className="grid gap-10 md:grid-cols-2 lg:grid-cols-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
           {/* Brand */}
-          <div className="space-y-4">
+          <motion.div className="space-y-4" variants={itemVariants}>
             <h3 className="text-3xl font-bold text-red-500">Chicken Kickers</h3>
             <p className="leading-relaxed">
               Mansoura's premier destination for authentic fried chicken and Egyptian flavors.
             </p>
             <div className="flex space-x-4 mt-2">
-              <a href="https://instagram.com/chicken.kickers" target="_blank" rel="noopener noreferrer" className="p-3 bg-red-500 rounded-lg text-white hover:bg-red-600 transition">
-                <FaInstagram size={20} />
-              </a>
-              <a href="https://tiktok.com/@chicken.kickers" target="_blank" rel="noopener noreferrer" className="p-3 bg-red-500 rounded-lg text-white hover:bg-red-600 transition">
-                <FaTiktok size={20} />
-              </a>
+              {[
+                { href: "https://instagram.com/chicken.kickers", icon: FaInstagram },
+                { href: "https://tiktok.com/@chicken.kickers", icon: FaTiktok },
+              ].map((social, idx) => (
+                <motion.a
+                  key={idx}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-red-500 rounded-lg text-white hover:bg-red-600 transition"
+                  variants={socialIconVariants}
+                  whileHover="hover"
+                  whileTap="tap"
+                >
+                  <social.icon size={20} />
+                </motion.a>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Contact Info */}
-          <div className="space-y-4">
+          <motion.div className="space-y-4" variants={itemVariants}>
             <h4 className="text-xl font-semibold text-red-500">Contact Info</h4>
             <div className="space-y-2">
-              <div className="flex items-start gap-3">
-                <FaMapMarkerAlt className="text-red-500 mt-1" />
-                <p>
-                  آخر المشاية بجوار مسجد الخير<br />
-                  Mansoura, Egypt<br />
-                  Postal Code: 15497
-                </p>
-              </div>
-              <div className="flex items-center gap-3">
-                <FaPhone className="text-red-500" />
-                <p>+20 123 456 7890</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <FaEnvelope className="text-red-500" />
-                <p>orders@chickenkickers.eg</p>
-              </div>
-              <div className="flex items-start gap-3">
-                <FaClock className="text-red-500 mt-1" />
-                <p>Every day: 11:00 AM - 11:00 PM</p>
-              </div>
+              {[
+                { icon: FaMapMarkerAlt, text: "آخر المشاية بجوار مسجد الخير\nMansoura, Egypt\nPostal Code: 15497" },
+                { icon: FaPhone, text: "+20 123 456 7890" },
+                { icon: FaEnvelope, text: "orders@chickenkickers.eg" },
+                { icon: FaClock, text: "Every day: 11:00 AM - 11:00 PM" },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  className="flex items-start gap-3"
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <item.icon className="text-red-500 mt-1" />
+                  <p>{item.text}</p>
+                </motion.div>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div className="space-y-4">
+          <motion.div className="space-y-4" variants={itemVariants}>
             <h4 className="text-xl font-semibold text-red-500">Quick Links</h4>
-            <div className="flex flex-col gap-2">
-              <Link to="/" className="hover:text-red-400 transition">Home</Link>
-              <Link to="/menu" className="hover:text-red-400 transition">Menu</Link>
-              <Link to="/about" className="hover:text-red-400 transition">About Us</Link>
-              <Link to="/contact" className="hover:text-red-400 transition">Contact</Link>
-            </div>
-          </div>
+            <motion.div
+              className="flex flex-col gap-2"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {[
+                { to: "/", label: "Home" },
+                { to: "/menu", label: "Menu" },
+                { to: "/about", label: "About Us" },
+                { to: "/contact", label: "Contact" },
+              ].map((link, idx) => (
+                <motion.div key={idx} variants={linkVariants}>
+                  <Link to={link.to} className="text-gray-300">
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
 
           {/* Restaurant Details */}
-          <div className="space-y-4">
+          <motion.div className="space-y-4" variants={itemVariants}>
             <h4 className="text-xl font-semibold text-red-500">Restaurant Info</h4>
             <div className="space-y-2">
-              <div className="flex items-center gap-3">
-                <FaUtensils className="text-red-500" />
-                <div>
-                  <p className="font-medium">Category</p>
-                  <p className="text-sm text-gray-400">Fast Food (مطعم طعام سريع)</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <FaDollarSign className="text-red-500" />
-                <div>
-                  <p className="font-medium">Price Range</p>
-                  <p className="text-sm text-gray-400">$</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <FaUtensils className="text-red-500 mt-1" />
-                <div>
-                  <p className="font-medium">Services</p>
-                  <p className="text-sm text-gray-400">Dine-in, Pickup (تناول الطعام داخل المطعم · استلام من المتجر)</p>
-                </div>
-              </div>
+              {[
+                { icon: FaUtensils, title: "Category", desc: "Fast Food (مطعم طعام سريع)" },
+                { icon: FaDollarSign, title: "Price Range", desc: "$" },
+                { icon: FaUtensils, title: "Services", desc: "Dine-in, Pickup (تناول الطعام داخل المطعم · استلام من المتجر)" },
+              ].map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  className="flex items-start gap-3"
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <item.icon className="text-red-500 mt-1" />
+                  <div>
+                    <p className="font-medium">{item.title}</p>
+                    <p className="text-sm text-gray-400">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between text-sm text-gray-500">
+        <motion.div
+          className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between text-sm text-gray-500"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true }}
+        >
           <p>© {new Date().getFullYear()} Chicken Kickers. All rights reserved.</p>
           <p className="mt-2 md:mt-0">Made with ❤️ in Mansoura, Egypt</p>
-        </div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }
