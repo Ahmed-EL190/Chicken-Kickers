@@ -28,7 +28,6 @@ export default function Contact() {
       variants={containerVariants}
     >
       <div className="mx-auto max-w-7xl px-4 py-16 md:px-6">
-
         {/* 🔥 HERO */}
         <motion.section className="text-center mb-20" variants={itemVariants}>
           <div className="inline-flex items-center px-4 py-2 bg-red-600/20 text-red-400 rounded-full text-sm mb-6">
@@ -41,16 +40,15 @@ export default function Contact() {
           </h1>
 
           <p className="text-gray-400 max-w-2xl mx-auto">
-            Located in the heart of Mansoura – come enjoy the best fried chicken 🔥
+            Located in the heart of Mansoura – come enjoy the best fried chicken
+            🔥
           </p>
         </motion.section>
 
         {/* 🔥 GRID */}
         <div className="grid lg:grid-cols-2 gap-10">
-
           {/* 🔥 LEFT INFO */}
           <motion.div className="space-y-6" variants={itemVariants}>
-            
             {[
               {
                 icon: <FaUtensils />,
@@ -97,7 +95,6 @@ export default function Contact() {
           {/* 🔥 GOOGLE MAP REAL */}
           <motion.div variants={itemVariants}>
             <div className="rounded-2xl overflow-hidden border border-gray-800 shadow-xl">
-
               <iframe
                 title="map"
                 src="https://www.google.com/maps?q=آخر+المشاية+بجوار+مسجد+الخير+المنصورة&output=embed"
@@ -106,9 +103,7 @@ export default function Contact() {
                 style={{ border: 0 }}
                 allowFullScreen=""
                 loading="lazy"
-                
               ></iframe>
-
             </div>
 
             <div className="mt-4 text-center">
@@ -128,9 +123,7 @@ export default function Contact() {
           className="mt-20 bg-gray-900 p-10 rounded-3xl border border-gray-800"
           variants={itemVariants}
         >
-          <h2 className="text-3xl font-bold text-center mb-8">
-            Get in Touch
-          </h2>
+          <h2 className="text-3xl font-bold text-center mb-8">Get in Touch</h2>
 
           <form className="max-w-2xl mx-auto space-y-6">
             <input
@@ -160,14 +153,23 @@ export default function Contact() {
           <h3 className="text-xl mb-6">Follow Us</h3>
 
           <div className="flex justify-center gap-6">
-            {[FaInstagram, FaTiktok].map((Icon, i) => (
-              <motion.div
+            {[
+              {
+                icon: FaInstagram,
+                link: "https://instagram.com/chicken.kickers",
+              },
+              { icon: FaTiktok, link: "https://tiktok.com/@chicken.kickers" },
+            ].map(({ icon: Icon, link }, i) => (
+              <motion.a
                 key={i}
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.2 }}
                 className="p-4 bg-gray-900 rounded-xl border border-gray-800 cursor-pointer hover:border-red-500"
               >
                 <Icon size={24} className="text-red-500" />
-              </motion.div>
+              </motion.a>
             ))}
           </div>
         </motion.section>
