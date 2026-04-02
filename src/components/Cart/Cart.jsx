@@ -1,21 +1,46 @@
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContextValue";
 
 export default function CartPage() {
   const { cartItems, removeFromCart, updateQuantity, total, clearCart } = useContext(CartContext);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   if (cartItems.length === 0) {
     return (
-      <div className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg text-center mt-12 max-w-3xl mx-auto">
+      <motion.div
+        className="rounded-2xl border border-gray-200 bg-white p-8 shadow-lg text-center mt-12 max-w-3xl mx-auto"
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <h2 className="text-3xl font-bold text-gray-800">🛒 Your Cart</h2>
         <p className="mt-4 text-gray-500">Your cart is empty. Start adding meals!</p>
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 mt-12">
-      <div className="flex justify-between items-center">
+    <motion.div
+      className="max-w-4xl mx-auto space-y-6 mt-12"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.div
+        className="flex justify-between items-center"
+        variants={itemVariants}
+      >
         <h2 className="text-3xl font-bold text-gray-800">🛒 Your Cart</h2>
         <button
           onClick={clearCart}
@@ -23,11 +48,19 @@ export default function CartPage() {
         >
           Clear All
         </button>
-      </div>
+      </motion.div>
 
-      <div className="grid gap-6">
+      <motion.div
+        className="grid gap-6"
+        variants={containerVariants}
+      >
         {cartItems.map((item) => (
-          <div key={item.id} className="flex items-center bg-white rounded-2xl shadow-md p-4 hover:shadow-xl transition">
+          <motion.div
+            key={item.id}
+            className="flex items-center bg-white rounded-2xl shadow-md p-4 hover:shadow-xl transition"
+            variants={itemVariants}
+            whileHover={{ scale: 1.02 }}
+          >
             <div className="w-24 h-24 bg-gray-100 rounded-xl flex items-center justify-center text-gray-400 text-sm font-semibold">
               Image
             </div>
@@ -61,18 +94,22 @@ export default function CartPage() {
                 ✕
               </button>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
-      <div className="bg-white rounded-2xl p-6 shadow-md flex flex-col md:flex-row justify-between items-center">
+      <motion.div
+        className="bg-white rounded-2xl p-6 shadow-md flex flex-col md:flex-row justify-between items-center"
+        variants={itemVariants}
+        whileHover={{ scale: 1.02 }}
+      >
         <div className="text-xl font-bold text-gray-800">
           Total: <span className="text-orange-600">{total.toLocaleString()} EGP</span>
         </div>
         <button className="mt-4 md:mt-0 px-8 py-3 bg-green-600 text-white font-bold rounded-2xl hover:bg-green-700 transition">
           Checkout
         </button>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

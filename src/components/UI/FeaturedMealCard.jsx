@@ -1,6 +1,16 @@
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+
 export default function FeaturedMealCard({ meal }) {
   return (
-    <div className="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden border border-gray-100">
+    <motion.div
+      className="group relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden border border-gray-100"
+      whileHover={{ y: -8, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+    >
       {/* Image Container */}
       <div className="relative overflow-hidden">
         <img
@@ -31,6 +41,6 @@ export default function FeaturedMealCard({ meal }) {
 
       {/* Hover Effect Border */}
       <div className="absolute inset-0 rounded-3xl border-2 border-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-    </div>
+    </motion.div>
   );
 }

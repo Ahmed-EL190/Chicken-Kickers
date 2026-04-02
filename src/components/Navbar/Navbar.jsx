@@ -2,7 +2,16 @@ import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CartContext } from "../../context/CartContextValue";
-import { FaHome, FaUtensils, FaInfoCircle, FaMapMarkerAlt, FaShoppingCart, FaBars, FaTimes, FaMapPin } from "react-icons/fa";
+import {
+  FaHome,
+  FaUtensils,
+  FaInfoCircle,
+  FaMapMarkerAlt,
+  FaShoppingCart,
+  FaBars,
+  FaTimes,
+  FaMapPin,
+} from "react-icons/fa";
 
 export default function Navbar({ onCartClick }) {
   const [open, setOpen] = useState(false);
@@ -12,7 +21,7 @@ export default function Navbar({ onCartClick }) {
     { to: "/", label: "Home", icon: FaHome },
     { to: "/menu", label: "Menu", icon: FaUtensils },
     { to: "/about", label: "About", icon: FaInfoCircle },
-    { to: "/contact", label: "Location", icon: FaMapMarkerAlt }
+    { to: "/contact", label: "Location", icon: FaMapMarkerAlt },
   ];
 
   const containerVariants = {
@@ -75,7 +84,9 @@ export default function Navbar({ onCartClick }) {
               >
                 Chicken Kickers
               </motion.h1>
-              <p className="text-xs text-gray-400 hidden md:block">Mansoura, Egypt</p>
+              <p className="text-xs text-gray-400 hidden md:block">
+                Mansoura, Egypt
+              </p>
             </div>
           </Link>
         </motion.div>
@@ -109,6 +120,7 @@ export default function Navbar({ onCartClick }) {
         <div className="flex items-center space-x-4">
           {/* Cart Button */}
           <motion.button
+            id="cart-icon"
             onClick={onCartClick}
             className="relative flex items-center justify-center bg-linear-to-r from-red-500 to-red-600 text-white rounded-xl w-12 h-12 hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg hover:shadow-red-500/25 group"
             whileHover={{ scale: 1.1 }}

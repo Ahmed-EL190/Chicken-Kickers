@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import {
   FaStar,
@@ -9,6 +10,7 @@ import {
   FaAward,
   FaInstagram,
   FaTiktok,
+  FaChevronRight,
 } from "react-icons/fa";
 import FeaturedMealCard from "../../components/UI/FeaturedMealCard";
 import { featuredMeals, customerFavorites } from "../../data/meals";
@@ -37,188 +39,265 @@ const testimonials = [
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
-const floatingAnimation = {
-  y: [0, -10, 0],
-  transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-};
-
 export default function Home() {
   return (
     <motion.article
-      className="min-h-screen"
+      className="min-h-screen bg-[#050505]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.8 }}
     >
-      {/* Hero Section */}
-      <motion.section
-        className="relative bg-gradient-to-br from-black via-gray-900 to-black py-20 md:py-32 overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        {/* Animated Background Blobs */}
-        <motion.div
-          className="absolute top-20 right-10 w-72 h-72 bg-red-500/10 rounded-full blur-3xl"
-          animate={{ y: [0, 50, 0], x: [0, 30, 0] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-10 left-10 w-96 h-96 bg-red-600/5 rounded-full blur-3xl"
-          animate={{ y: [0, -50, 0], x: [0, -30, 0] }}
-          transition={{ duration: 10, repeat: Infinity, delay: 1 }}
-        />
+      {/* Luxury Hero Section */}
+      <section className="relative min-h-screen flex items-center overflow-hidden ">
+        {/* Background Gradient */}
+        <div className="absolute inset-0 bg-linear-to-br from-black via-[#0a0a0a] to-[#1a0505]" />
+        
+        {/* Decorative Line */}
+        <div className="absolute top-0 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-red-600 to-transparent" />
+        
+        {/* Subtle Pattern */}
+        <div className="absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_center,#ff0000_0%,transparent_70%)]" />
 
-        <div className="mx-auto max-w-7xl px-4 md:px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 py-20 relative z-10 w-full">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Content */}
-            <div className="space-y-8">
-              {/* Badge */}
-              <div className="inline-flex items-center px-4 py-2 bg-red-100 text-red-800 rounded-full text-sm font-medium">
-                <FaAward className="w-4 h-4 mr-2" />
-                #1 Fried Chicken in Mansoura
-              </div>
+            <div className="space-y-10">
+              {/* Elegant Badge */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-3"
+              >
+                <div className="h-px w-16 bg-linear-to-r from-red-600 to-transparent" />
+                <span className="text-red-500/80 tracking-[0.4em] text-xs uppercase font-light">
+                  Est. 2020 • Mansoura
+                </span>
+              </motion.div>
 
               {/* Main Heading */}
-              <div>
-                <h1 className="text-4xl md:text-6xl font-black text-white leading-tight">
-                  Chicken<span className="text-red-600"> Kickers</span>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.9] mb-4">
+                  Chicken
+                  <span className="block text-transparent bg-clip-text bg-linear-to-r from-red-500 to-red-700">
+                    Kickers
+                  </span>
                 </h1>
-                <p className="text-xl md:text-2xl text-red-600 font-semibold mt-2">
+                <p className="text-xl md:text-2xl text-red-500/90 font-light tracking-[0.2em] uppercase mt-6">
                   Full Blast Fried Chicken
                 </p>
-              </div>
+              </motion.div>
 
               {/* Description */}
-              <p className="text-lg text-gray-300 max-w-lg leading-relaxed">
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="text-gray-400 text-lg max-w-lg leading-relaxed font-light border-l-2 border-red-600/30 pl-6"
+              >
                 Experience the perfect blend of crispy perfection and authentic
                 Egyptian spices. Handcrafted with love in Mansoura for the
                 ultimate fried chicken experience.
-              </p>
+              </motion.p>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+                className="flex flex-col sm:flex-row gap-6"
+              >
                 <Link
                   to="/menu"
-                  className="px-8 py-4 bg-red-600 text-white font-bold text-lg rounded-xl shadow-lg hover:bg-red-700 hover:shadow-xl transition-all duration-300 text-center"
+                  className="group relative px-10 py-5 bg-red-600 text-white font-medium tracking-widest uppercase text-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(220,38,38,0.3)]"
                 >
-                  Order Now
+                  <span className="relative z-10 flex items-center gap-3">
+                    Order Now
+                    <FaChevronRight className="group-hover:translate-x-1 transition-transform" />
+                  </span>
+                  <div className="absolute inset-0 bg-linear-to-r from-red-700 to-red-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 </Link>
+                
                 <Link
                   to="/contact"
-                  className="px-8 py-4 border-2 border-red-600 text-red-600 font-semibold text-lg rounded-xl hover:bg-red-600 hover:text-white transition-all duration-300 text-center"
+                  className="px-10 py-5 border border-white/20 text-white font-medium tracking-widest uppercase text-sm hover:border-red-600 hover:text-red-500 transition-all duration-300 backdrop-blur-sm"
                 >
                   Find Us
                 </Link>
-              </div>
+              </motion.div>
 
-              {/* Quick Info */}
-              <div className="flex flex-wrap gap-6 pt-4">
-                <div className="flex items-center text-gray-300">
-                  <FaMapMarkerAlt className="w-5 h-5 mr-2 text-red-600" />
-                  <span>Mansoura, Egypt</span>
-                </div>
-                <div className="flex items-center text-gray-300">
-                  <FaClock className="w-5 h-5 mr-2 text-red-600" />
-                  <span>Daily 11AM - 11PM</span>
-                </div>
-                <div className="flex items-center text-gray-300">
-                  <FaUsers className="w-5 h-5 mr-2 text-red-600" />
-                  <span>500+ Happy Customers</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Hero Image */}
-            <div className="relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src="https://scontent.fcai19-12.fna.fbcdn.net/v/t39.30808-6/648989523_962318009461027_3329691687516125818_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=13d280&_nc_eui2=AeHnOT30yynaST6KYmTC_KTMNrVqztbBfWQ2tWrO1sF9ZJ02HXqIIq8yPUWCVh3tPc4XIiTtclXrRNzbJSO7hOss&_nc_ohc=12RQEN9xIgIQ7kNvwFlLpX9&_nc_oc=AdpxqLfgj-ByT17L-6ozPZG6RJud1LVxmbs0bC9qMKEUitJsVLX288skn6VqJP69v6w&_nc_zt=23&_nc_ht=scontent.fcai19-12.fna&_nc_gid=CM1TutYZcuVDY9Ugfs3P2Q&_nc_ss=7a3a8&oh=00_AfybzURwQqsYIiFt7Qsi_GiUDdJdjMPKRKhlQX0gVllLFg&oe=69D13887"
-                  alt="Delicious fried chicken"
-                  className="w-full h-96 md:h-[500px] object-cover object-center"
-                />
-                {/* Gradient overlay to make text readable */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-              </div>
-
-              {/* Floating Card */}
+              {/* Info Bar */}
               <motion.div
-                animate={floatingAnimation}
-                className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl border border-gray-100"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="pt-10 border-t border-white/10 flex flex-wrap gap-10"
               >
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
-                    <FaStar className="w-6 h-6 text-red-600" />
+                <div className="flex items-center gap-3 text-gray-400">
+                  <div className="w-10 h-10 border border-red-600/30 flex items-center justify-center">
+                    <FaMapMarkerAlt className="text-red-600" />
                   </div>
                   <div>
-                    <div className="font-bold text-gray-900">4.9/5</div>
-                    <div className="text-sm text-gray-600">Customer Rating</div>
+                    <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Location</div>
+                    <div className="text-white">Mansoura, Egypt</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 text-gray-400">
+                  <div className="w-10 h-10 border border-red-600/30 flex items-center justify-center">
+                    <FaClock className="text-red-600" />
+                  </div>
+                  <div>
+                    <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Hours</div>
+                    <div className="text-white">Daily 11AM - 11PM</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 text-gray-400">
+                  <div className="w-10 h-10 border border-red-600/30 flex items-center justify-center">
+                    <FaUsers className="text-red-600" />
+                  </div>
+                  <div>
+                    <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Customers</div>
+                    <div className="text-white">500+ Happy</div>
                   </div>
                 </div>
               </motion.div>
             </div>
+
+            {/* Hero Image */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="relative"
+            >
+              <div className="relative aspect-4/5 overflow-hidden">
+                <div className="absolute inset-0 border border-red-600/20 translate-x-4 translate-y-4" />
+                <img
+                  src="https://scontent.fcai19-12.fna.fbcdn.net/v/t39.30808-6/648989523_962318009461027_3329691687516125818_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=13d280&_nc_eui2=AeHnOT30yynaST6KYmTC_KTMNrVqztbBfWQ2tWrO1sF9ZJ02HXqIIq8yPUWCVh3tPc4XIiTtclXrRNzbJSO7hOss&_nc_ohc=12RQEN9xIgIQ7kNvwFlLpX9&_nc_oc=AdpxqLfgj-ByT17L-6ozPZG6RJud1LVxmbs0bC9qMKEUitJsVLX288skn6VqJP69v6w&_nc_zt=23&_nc_ht=scontent.fcai19-12.fna&_nc_gid=CM1TutYZcuVDY9Ugfs3P2Q&_nc_ss=7a3a8&oh=00_AfybzURwQqsYIiFt7Qsi_GiUDdJdjMPKRKhlQX0gVllLFg&oe=69D13887"
+                  alt="Delicious fried chicken"
+                  className="w-full h-full object-cover grayscale-20 contrast-125"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-red-600/10 mix-blend-overlay" />
+              </div>
+
+              {/* Floating Rating Card */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -bottom-8 -left-8 bg-[#0a0a0a] border border-red-600/30 p-8 shadow-2xl"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 border border-red-600/50 flex items-center justify-center">
+                    <FaStar className="w-6 h-6 text-red-600" />
+                  </div>
+                  <div>
+                    <div className="text-3xl font-bold text-white">4.9/5</div>
+                    <div className="text-xs text-gray-500 uppercase tracking-widest mt-1">Customer Rating</div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Award Badge */}
+              <div className="absolute -top-4 -right-4 bg-red-600 text-white px-6 py-3 shadow-lg">
+                <div className="flex items-center gap-2 text-sm font-medium tracking-wider uppercase">
+                  <FaAward />
+                  #1 in Mansoura
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
-      </motion.section>
+      </section>
 
       {/* Featured Meals Section */}
-      <section className="py-20 bg-black">
-        <div className="mx-auto max-w-7xl px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Our Signature Dishes
-            </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Discover our most popular fried chicken creations that keep
-              customers coming back
-            </p>
+      <section className="py-24 bg-[#080808] relative">
+        <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-red-600/50 to-transparent" />
+        
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="text-red-600/80 tracking-[0.4em] text-xs uppercase block mb-4"
+            >
+              Culinary Excellence
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-5xl font-black text-white mb-6"
+            >
+              Our Signature <span className="text-red-600">Dishes</span>
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-gray-500 max-w-2xl mx-auto font-light"
+            >
+              Discover our most popular fried chicken creations that keep customers coming back
+            </motion.p>
           </div>
+
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredMeals.map((meal) => (
-              <FeaturedMealCard key={meal.id} meal={meal} />
+            {featuredMeals.map((meal, index) => (
+              <motion.div
+                key={meal.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <FeaturedMealCard meal={meal} />
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Special Offers Banner */}
-      <section className="py-20 bg-gradient-to-r from-black to-gray-800">
-        <div className="mx-auto max-w-7xl px-4 md:px-6">
-          <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
+      <section className="py-24 bg-[#050505] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,#7f1d1d_0%,transparent_50%)] opacity-20" />
+        
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
+          <div className="border border-white/10 p-8 md:p-16 relative">
+            <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-red-600 -translate-x-px -translate-y-px" />
+            <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-red-600 translate-x-px translate-y-px" />
+            
+            <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                  Weekend Special Combo
+                <span className="text-red-600/80 tracking-[0.4em] text-xs uppercase block mb-4">
+                  Limited Time
+                </span>
+                <h3 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
+                  Weekend Special <span className="text-red-600">Combo</span>
                 </h3>
-                <p className="text-lg text-gray-600 mb-6">
-                  Get 15% off on all family combos this weekend! Perfect for
-                  gatherings and game nights.
+                <p className="text-gray-400 text-lg mb-10 font-light leading-relaxed">
+                  Get 15% off on all family combos this weekend! Perfect for gatherings and game nights.
                 </p>
                 <Link
                   to="/menu"
-                  className="inline-block px-8 py-4 bg-red-600 text-white font-bold text-lg rounded-xl shadow-lg hover:bg-red-700 hover:shadow-xl transition-all duration-300"
+                  className="inline-flex items-center gap-3 px-10 py-5 bg-red-600 text-white font-medium tracking-widest uppercase text-sm hover:bg-red-700 transition-all duration-300 hover:shadow-[0_0_30px_rgba(220,38,38,0.3)]"
                 >
-                  Order Now
+                  Order Now <FaChevronRight />
                 </Link>
               </div>
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src="https://scontent.fcai19-12.fna.fbcdn.net/v/t39.30808-6/484354977_683532817339549_2785435405229920155_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=13d280&_nc_eui2=AeFvYGufwSTnBISuikkMSivjN5uWW8p4dNs3m5Zbynh027MX-_yuVXA4FEo__wNwubfRASRkLyZKHfXjUjNnbOg3&_nc_ohc=X2cj7u2uxxcQ7kNvwHHHfCj&_nc_oc=Adqg0tKlphUI6wOuNSR3C6ETEb90YeIhUF8UbzleiBe7enaTslA7YS2G32FffvbAnqw&_nc_zt=23&_nc_ht=scontent.fcai19-12.fna&_nc_gid=fJ0JNRwjnAt3WOvL-sAmhA&_nc_ss=7a3a8&oh=00_AfwBcfQhSoQ0ZuAh07fYtu3w66sYL8z7suWiPthjEvMc-g&oe=69D149EF"
-                  alt="Special combo"
-                  className="w-full h-96 md:h-[450px] object-cover object-center rounded-2xl shadow-lg"
-                />
-                {/* Gradient overlay optional for text readability */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+              
+              <div className="relative">
+                <div className="absolute inset-0 border border-red-600/20 translate-x-6 translate-y-6" />
+                <div className="relative overflow-hidden">
+                  <img
+                    src="https://scontent.fcai19-12.fna.fbcdn.net/v/t39.30808-6/484354977_683532817339549_2785435405229920155_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=13d280&_nc_eui2=AeFvYGufwSTnBISuikkMSivjN5uWW8p4dNs3m5Zbynh027MX-_yuVXA4FEo__wNwubfRASRkLyZKHfXjUjNnbOg3&_nc_ohc=X2cj7u2uxxcQ7kNvwHHHfCj&_nc_oc=Adqg0tKlphUI6wOuNSR3C6ETEb90YeIhUF8UbzleiBe7enaTslA7YS2G32FffvbAnqw&_nc_zt=23&_nc_ht=scontent.fcai19-12.fna&_nc_gid=fJ0JNRwjnAt3WOvL-sAmhA&_nc_ss=7a3a8&oh=00_AfwBcfQhSoQ0ZuAh07fYtu3w66sYL8z7suWiPthjEvMc-g&oe=69D149EF"
+                    alt="Special combo"
+                    className="w-full h-96 object-cover grayscale-20"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#050505] via-transparent to-transparent" />
+                </div>
               </div>
             </div>
           </div>
@@ -226,151 +305,187 @@ export default function Home() {
       </section>
 
       {/* Customer Favorites Section */}
-      <section className="py-20 bg-gray-900">
-        <div className="mx-auto max-w-7xl px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Customer Favorites
+      <section className="py-24 bg-[#0a0a0a]">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <span className="text-red-600/80 tracking-[0.4em] text-xs uppercase block mb-4">
+              Fan Favorites
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+              Customer <span className="text-red-600">Favorites</span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            <p className="text-gray-500 max-w-2xl mx-auto font-light">
               What our regulars can't get enough of
             </p>
           </div>
+
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {customerFavorites.map((meal) => (
-              <FeaturedMealCard key={meal.id} meal={meal} />
+            {customerFavorites.map((meal, index) => (
+              <motion.div
+                key={meal.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <FeaturedMealCard meal={meal} />
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-black">
-        <div className="mx-auto max-w-7xl px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              What Our Customers Say
+      <section className="py-24 bg-[#050505] relative">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,#7f1d1d_0%,transparent_50%)] opacity-20" />
+        
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
+          <div className="text-center mb-20">
+            <span className="text-red-600/80 tracking-[0.4em] text-xs uppercase block mb-4">
+              Testimonials
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+              What Our <span className="text-red-600">Customers</span> Say
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Don't just take our word for it - hear from our satisfied
-              customers
+            <p className="text-gray-500 max-w-2xl mx-auto font-light">
+              Don't just take our word for it - hear from our satisfied customers
             </p>
           </div>
+
           <div className="grid gap-8 md:grid-cols-3">
-            {testimonials.map((testimonial) => (
-              <div
+            {testimonials.map((testimonial, index) => (
+              <motion.div
                 key={testimonial.id}
-                className="bg-gray-800 rounded-2xl p-6 border border-gray-700"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-[#0a0a0a] border border-white/5 p-8 hover:border-red-600/30 transition-all duration-500 group"
               >
-                <div className="flex items-center mb-4">
+                <div className="flex text-red-600 mb-6">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <FaStar key={i} className="w-4 h-4" />
+                  ))}
+                </div>
+                <p className="text-gray-400 italic mb-8 leading-relaxed font-light group-hover:text-gray-300 transition-colors">
+                  "{testimonial.text}"
+                </p>
+                <div className="flex items-center gap-4 pt-6 border-t border-white/5">
                   <img
                     src={testimonial.image}
                     alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover mr-4"
+                    className="w-12 h-12 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                   />
                   <div>
-                    <h4 className="font-bold text-white">{testimonial.name}</h4>
-                    <div className="flex text-red-400">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <FaStar key={i} className="w-4 h-4" />
-                      ))}
-                    </div>
+                    <h4 className="font-bold text-white tracking-wide">{testimonial.name}</h4>
+                    <div className="text-xs text-red-600/80 uppercase tracking-widest mt-1">Verified Customer</div>
                   </div>
                 </div>
-                <p className="text-gray-300 italic">"{testimonial.text}"</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-black text-white">
-        <div className="mx-auto max-w-7xl px-4 md:px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Why Choose Chicken Kickers?
+      <section className="py-24 bg-[#080808]">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <span className="text-red-600/80 tracking-[0.4em] text-xs uppercase block mb-4">
+              Our Promise
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+              Why Choose <span className="text-red-600">Chicken Kickers?</span>
             </h2>
-            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            <p className="text-gray-500 max-w-2xl mx-auto font-light">
               What makes us the best choice for fried chicken in Mansoura
             </p>
           </div>
+
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
-                icon: <FaUtensils className="w-8 h-8" />,
+                icon: <FaUtensils className="w-6 h-6" />,
                 title: "Fresh Local Ingredients",
-                description:
-                  "We use only the freshest chicken and ingredients sourced locally in Mansoura.",
+                description: "We use only the freshest chicken and ingredients sourced locally in Mansoura.",
               },
               {
-                icon: <FaClock className="w-8 h-8" />,
+                icon: <FaClock className="w-6 h-6" />,
                 title: "Secret Egyptian Spice Mix",
-                description:
-                  "Our unique blend of spices gives our chicken that authentic Egyptian flavor.",
+                description: "Our unique blend of spices gives our chicken that authentic Egyptian flavor.",
               },
               {
-                icon: <FaUsers className="w-8 h-8" />,
+                icon: <FaUsers className="w-6 h-6" />,
                 title: "Fast Delivery in Mansoura",
-                description:
-                  "Quick and reliable delivery service right to your doorstep.",
+                description: "Quick and reliable delivery service right to your doorstep.",
               },
             ].map((item, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="bg-gray-800 rounded-2xl p-8 hover:bg-gray-700 transition-all duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group bg-[#0a0a0a] border border-white/5 p-10 hover:border-red-600/30 transition-all duration-500"
               >
-                <div className="text-red-400 mb-4">{item.icon}</div>
-                <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
-                <p className="text-gray-300 leading-relaxed">
+                <div className="w-16 h-16 border border-red-600/30 flex items-center justify-center text-red-600 mb-6 group-hover:bg-red-600 group-hover:text-white transition-all duration-300">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-4 tracking-wide">{item.title}</h3>
+                <p className="text-gray-500 font-light leading-relaxed group-hover:text-gray-400 transition-colors">
                   {item.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Contact CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-black to-gray-900 text-white">
-        <div className="mx-auto max-w-4xl px-4 md:px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Ready to Experience the Best?
+      <section className="py-24 bg-[#050505] relative overflow-hidden">
+        <div className="absolute inset-0 bg-linear-to-r from-red-900/20 via-transparent to-red-900/20" />
+        
+        <div className="mx-auto max-w-4xl px-6 lg:px-8 text-center relative">
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+            Ready to Experience the <span className="text-red-600">Best?</span>
           </h2>
-          <p className="text-lg text-orange-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of satisfied customers in Mansoura who choose Chicken
-            Kickers for their fried chicken cravings.
+          <p className="text-gray-400 text-lg mb-12 font-light max-w-2xl mx-auto">
+            Join thousands of satisfied customers in Mansoura who choose Chicken Kickers for their fried chicken cravings.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link
               to="/menu"
-              className="px-8 py-4 bg-white text-red-600 font-bold text-lg rounded-xl shadow-lg hover:bg-gray-100 transition-all duration-300"
+              className="group relative px-12 py-5 bg-red-600 text-white font-medium tracking-widest uppercase text-sm overflow-hidden transition-all duration-300 hover:shadow-[0_0_40px_rgba(220,38,38,0.4)]"
             >
-              Order Online Now
+              <span className="relative z-10">Order Online Now</span>
+              <div className="absolute inset-0 bg-linear-to-r from-red-700 to-red-600 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             </Link>
+            
             <Link
               to="/contact"
-              className="px-8 py-4 border-2 border-white text-white font-semibold text-lg rounded-xl hover:bg-white hover:text-red-600 transition-all duration-300"
+              className="px-12 py-5 border border-white/20 text-white font-medium tracking-widest uppercase text-sm hover:border-red-600 hover:text-red-500 transition-all duration-300 backdrop-blur-sm"
             >
               Visit Our Location
             </Link>
           </div>
-          <div className="mt-8 flex justify-center space-x-6">
+
+          <div className="mt-16 flex justify-center gap-8">
             <a
               href="https://instagram.com/chicken.kickers"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-red-300 transition-colors"
+              className="w-12 h-12 border border-white/10 flex items-center justify-center text-gray-400 hover:border-red-600 hover:text-red-600 transition-all duration-300"
             >
-              <FaInstagram size={24} />
+              <FaInstagram size={20} />
             </a>
             <a
               href="https://tiktok.com/@chicken.kickers"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-red-300 transition-colors"
+              className="w-12 h-12 border border-white/10 flex items-center justify-center text-gray-400 hover:border-red-600 hover:text-red-600 transition-all duration-300"
             >
-              <FaTiktok size={24} />
+              <FaTiktok size={20} />
             </a>
           </div>
         </div>

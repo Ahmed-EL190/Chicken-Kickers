@@ -1,6 +1,15 @@
+// eslint-disable-next-line no-unused-vars
+import { motion } from "framer-motion";
+
 export default function Banner({ title, description, image, buttonText, buttonLink }) {
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-linear-to-r from-orange-500 via-orange-600 to-red-500 p-8 md:p-12 text-white shadow-2xl">
+    <motion.div
+      className="relative overflow-hidden rounded-3xl bg-linear-to-r from-orange-500 via-orange-600 to-red-500 p-8 md:p-12 text-white shadow-2xl"
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+    >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-0 left-0 w-32 h-32 bg-white rounded-full -translate-x-16 -translate-y-16" />
@@ -40,6 +49,6 @@ export default function Banner({ title, description, image, buttonText, buttonLi
       {/* Decorative Elements */}
       <div className="absolute top-4 right-4 w-16 h-16 bg-white/10 rounded-full blur-sm" />
       <div className="absolute bottom-4 left-4 w-12 h-12 bg-white/10 rounded-full blur-sm" />
-    </div>
+    </motion.div>
   );
 }
